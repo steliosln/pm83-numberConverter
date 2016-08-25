@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class ConverterEngineTest {
@@ -33,6 +34,17 @@ public class ConverterEngineTest {
 		String expected = "II";
 		ConverterEngine converterEngine = new ConverterEngine();
 		String conversion = converterEngine.convert(2);
+		
+		assertEquals(expected, conversion);
+		
+	}
+	
+	@Ignore("Not yet ready")
+	@Test
+	public void testConvertFour() {
+		String expected = "IV";
+		ConverterEngine converterEngine = new ConverterEngine();
+		String conversion = converterEngine.convert(4);
 		
 		assertEquals(expected, conversion);
 		
