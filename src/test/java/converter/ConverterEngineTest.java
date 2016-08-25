@@ -25,10 +25,12 @@ public class ConverterEngineTest {
 
 	@Before
 	public void setUp() throws Exception {
+		System.out.println("=Initializing test case=");
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		System.out.println("=Tearing test case=\n");
 	}
 
 	@Test
@@ -36,17 +38,17 @@ public class ConverterEngineTest {
 		expected = "II";
 		ConverterEngine converterEngine = new ConverterEngine();
 		actual = converterEngine.convert(2);
-		
+		System.out.println("THREEORLESS::: Actual " + actual);
 		assertEquals(expected, actual);
 		
 	}
 	
 	@Test
 	public void testConvertExtremes() {
-		expected = "V";
+		expected = "X";
 		ConverterEngine converterEngine = new ConverterEngine();
-		actual = converterEngine.convert(5);
-		System.out.println("EXTREME::: Actual " + actual);
+		actual = converterEngine.convert(10);
+		System.out.println("EXTREMES::: Actual " + actual);
 		assertEquals(expected, actual);
 		
 	}
