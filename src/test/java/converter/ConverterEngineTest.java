@@ -10,6 +10,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 public class ConverterEngineTest {
+	private String expected;
+	private String actual;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -31,22 +33,32 @@ public class ConverterEngineTest {
 
 	@Test
 	public void testConvertLessOrThree() {
-		String expected = "II";
+		expected = "II";
 		ConverterEngine converterEngine = new ConverterEngine();
-		String conversion = converterEngine.convert(2);
+		actual = converterEngine.convert(2);
 		
-		assertEquals(expected, conversion);
+		assertEquals(expected, actual);
 		
 	}
 	
-	@Ignore("Not yet ready")
+	@Test
+	public void testConvertExtremes() {
+		expected = "V";
+		ConverterEngine converterEngine = new ConverterEngine();
+		actual = converterEngine.convert(5);
+		System.out.println("EXTREME::: Actual " + actual);
+		assertEquals(expected, actual);
+		
+	}
+	
+	@Ignore("not yet implemented")
 	@Test
 	public void testConvertFour() {
-		String expected = "IV";
+		expected = "IV";
 		ConverterEngine converterEngine = new ConverterEngine();
-		String conversion = converterEngine.convert(4);
-		
-		assertEquals(expected, conversion);
+		actual = converterEngine.convert(4);
+		System.out.println("FOUR::: Actual " + actual);
+		assertEquals(expected, actual);
 		
 	}
 
