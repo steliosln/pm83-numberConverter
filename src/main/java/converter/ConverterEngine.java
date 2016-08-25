@@ -43,7 +43,7 @@ public class ConverterEngine {
 		this.convertExtremities(number);
 		
 		if (!this.isDoneConversion()){
-			
+			//if(number > one.getValue())
 			if (number < five.getValue()){
 				if(number == five.getValue() - 1){
 					this.setNumberInRoman(1, one.name());
@@ -53,7 +53,11 @@ public class ConverterEngine {
 					this.setNumberInRoman(number, one.name());
 				
 			}
-//				this.setNumberInRoman(number, one.name());
+			
+			if(number == five.getValue() + 1){
+				this.convert(number-1);
+				this.setNumberInRoman(1, one.name());
+			}
 		}
 
 		return numberInRoman;
@@ -67,7 +71,8 @@ public class ConverterEngine {
 	public String convertExtremities(int number) {
 		for (ValueMapper values : ValueMapper.values()) {
 			if (number == values.getValue())
-				numberInRoman = values.name();
+				this.setNumberInRoman(1, values.name());
+//				numberInRoman = values.name();
 		}
 		if (!this.numberInRoman.isEmpty())
 			this.setDoneConversion();

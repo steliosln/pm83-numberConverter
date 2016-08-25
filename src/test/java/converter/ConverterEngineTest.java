@@ -40,7 +40,6 @@ public class ConverterEngineTest {
 		actual = converterEngine.convert(2);
 		System.out.println("THREEORLESS::: Actual " + actual);
 		assertEquals(expected, actual);
-		
 	}
 	
 	@Test
@@ -50,7 +49,6 @@ public class ConverterEngineTest {
 		actual = converterEngine.convert(10);
 		System.out.println("EXTREMES::: Actual " + actual);
 		assertEquals(expected, actual);
-		
 	}
 	
 	@Test
@@ -60,7 +58,15 @@ public class ConverterEngineTest {
 		actual = converterEngine.convert(4);
 		System.out.println("FOUR::: Actual " + actual);
 		assertEquals(expected, actual);
-		
+	}
+	
+	@Test
+	public void testConvertSix() {
+		expected = "VI";
+		ConverterEngine converterEngine = new ConverterEngine();
+		actual = converterEngine.convert(6);
+		System.out.println("FOUR::: Actual " + actual);
+		assertEquals(expected, actual);
 	}
 
 }
