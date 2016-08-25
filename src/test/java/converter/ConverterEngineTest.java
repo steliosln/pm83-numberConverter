@@ -53,7 +53,6 @@ public class ConverterEngineTest {
 		
 	}
 	
-	@Ignore("not yet implemented")
 	@Test
 	public void testConvertFour() {
 		expected = "IV";

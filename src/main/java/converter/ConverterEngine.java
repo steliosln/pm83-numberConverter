@@ -1,7 +1,6 @@
 package converter;
 
 public class ConverterEngine {
-	private String numberInRoman;
 	private ValueMapper one = ValueMapper.I;
 	private ValueMapper five = ValueMapper.V;
 	private ValueMapper ten = ValueMapper.X;
@@ -9,7 +8,8 @@ public class ConverterEngine {
 	private ValueMapper hundred = ValueMapper.C;
 	private ValueMapper fiveHundred = ValueMapper.D;
 	private ValueMapper thousand = ValueMapper.M;
-	boolean doneConversion;
+	private boolean doneConversion;
+	private String numberInRoman;
 
 	public boolean isDoneConversion() {
 		return doneConversion;
@@ -28,32 +28,35 @@ public class ConverterEngine {
 		return numberInRoman;
 	}
 	
+	/**
+	 * Adds/appends a passed letter to the {@link #numberInRoman}
+	 * @param numberOfLetters the amount of times the letter is to be added
+	 * @param letter the letter to add
+	 */
 	public void setNumberInRoman(int numberOfLetters, String letter) {
 		for (int i = 0; i < numberOfLetters; i++) {
 			this.numberInRoman += letter;
 		}		
 	}
 
-
 	public String convert(int number) {
 		this.convertExtremities(number);
 		
 		if (!this.isDoneConversion()){
 			
-			
-			if (number < five.getValue())
-				this.setNumberInRoman(number, one.name());
-	/*			for (int i = 0; i < number; i++) {
-					//this.numberInRoman += one.name();
-					writeRoman(2, one.name());
-				}*/
+			if (number < five.getValue()){
+				if(number == five.getValue() - 1){
+					this.setNumberInRoman(1, one.name());
+					this.setNumberInRoman(1, five.name());
+				}
+				else
+					this.setNumberInRoman(number, one.name());
+				
+			}
+//				this.setNumberInRoman(number, one.name());
 		}
 
 		return numberInRoman;
-	}
-	
-	public void writeRoman(int numberOfLetters, String letter){
-				
 	}
 
 	/**
