@@ -29,8 +29,13 @@ public class ConverterEngineTest {
 	}
 
 	@Test
-	public void testConvert() {
-		fail("Not yet implemented");
+	public void testConvertLessOrThree() {
+		String expected = "II";
+		ConverterEngine converterEngine = new ConverterEngine();
+		String conversion = converterEngine.convert(2);
+		
+		assertEquals(expected, conversion);
+		
 	}
 
 }
