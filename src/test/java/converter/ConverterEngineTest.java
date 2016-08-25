@@ -62,9 +62,9 @@ public class ConverterEngineTest {
 	
 	@Test
 	public void testConvertSix() {
-		expected = "VI";
+		expected = "VII";
 		ConverterEngine converterEngine = new ConverterEngine();
-		actual = converterEngine.convert(6);
+		actual = converterEngine.convert(7);
 		System.out.println("FOUR::: Actual " + actual);
 		assertEquals(expected, actual);
 	}

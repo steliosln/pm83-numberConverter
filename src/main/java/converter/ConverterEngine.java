@@ -44,20 +44,33 @@ public class ConverterEngine {
 		
 		if (!this.isDoneConversion()){
 			//if(number > one.getValue())
-			if (number < five.getValue()){
-				if(number == five.getValue() - 1){
-					this.setNumberInRoman(1, one.name());
-					this.setNumberInRoman(1, five.name());
-				}
-				else
+			/**
+			 * It is possible to make the body here recursive 
+			 * for all possible cases.
+			 * use lowerExtreme and upperExtreme
+			 * change extremes to the next when these are equal 
+			 */
+			if (number < five.getValue()) {
+				int timesBelow = 1;
+
+				if (number == five.getValue() - timesBelow) {
+					this.setNumberInRoman(timesBelow, one.name());
+					this.convert(number + timesBelow);
+				} else
 					this.setNumberInRoman(number, one.name());
-				
+
+			} else {
+				int timesAbove = 0;
+				while (timesAbove + five.getValue() != number) {
+					timesAbove++;
+				}
+				this.convert(number - timesAbove);
+				this.setNumberInRoman(timesAbove, one.name());
 			}
 			
-			if(number == five.getValue() + 1){
-				this.convert(number-1);
-				this.setNumberInRoman(1, one.name());
-			}
+			/**
+			 * End of body to make recursive
+			 */			
 		}
 
 		return numberInRoman;
@@ -72,10 +85,11 @@ public class ConverterEngine {
 		for (ValueMapper values : ValueMapper.values()) {
 			if (number == values.getValue())
 				this.setNumberInRoman(1, values.name());
-//				numberInRoman = values.name();
 		}
+		
 		if (!this.numberInRoman.isEmpty())
 			this.setDoneConversion();
+		
 		return numberInRoman;
 	}
 }
