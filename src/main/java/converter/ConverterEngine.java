@@ -45,6 +45,29 @@ public class ConverterEngine {
 		if (!this.isDoneConversion()){
 			//if(number > one.getValue())
 			/**
+			 * 
+			 * public int multiply9 (int n) { 
+			 * if (n == 0) { return 0; } 
+			 * else if(n == 1) { return 9; } 
+			 * else return 9 + multiply9(n-1); }
+			 * 
+			 * System.out.println(multiply9(6));
+			 * 
+			 * if(!isDoneConversion){
+			 * 
+			 * 	//if(number == extremity)
+			 * 		//convertExtremity()
+			 * 	if(number == upperExtremity -1){
+			 * 		setNumberInRoman(timesBelow, lowerExtremity)
+			 * 		convert(number + timesBelow)
+			 * 	}
+			 * 	else{
+			 * 		convert(number - timesAbove)
+			 * 		setNumberInRoman(timesAbove, lowerExtremity)
+			 * 	}
+			 * }
+			 */
+			/**
 			 * It is possible to make the body here recursive 
 			 * for all possible cases.
 			 * use lowerExtreme and upperExtreme
@@ -54,6 +77,7 @@ public class ConverterEngine {
 				int timesBelow = 1;
 
 				if (number == five.getValue() - timesBelow) {
+					//count times below here
 					this.setNumberInRoman(timesBelow, one.name());
 					this.convert(number + timesBelow);
 				} else
