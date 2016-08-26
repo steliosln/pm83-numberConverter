@@ -77,5 +77,16 @@ public class ConverterEngineTest {
 		System.out.println("NINE::: Actual " + actual);
 		assertEquals(expected, actual);
 	}
+	
+	@Ignore("needs another perspective")
+	@Test
+	public void testSetBases() {
+		expected = "LI";
+		ConverterEngine converterEngine = new ConverterEngine();
+		converterEngine.setBases(16);
+		System.out.println("BASES::: upper " + converterEngine.getUpperBase());
+		System.out.println("BASES::: lower " + converterEngine.getLowerBase());
+		assertEquals(expected, converterEngine.getUpperBase());
+	}
 
 }

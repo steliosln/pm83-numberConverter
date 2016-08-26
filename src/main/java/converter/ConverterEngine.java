@@ -4,12 +4,22 @@ public class ConverterEngine {
 	private ValueMapper one = ValueMapper.I;
 	private ValueMapper five = ValueMapper.V;
 	private ValueMapper ten = ValueMapper.X;
-	private ValueMapper fifty = ValueMapper.L;
-	private ValueMapper hundred = ValueMapper.C;
-	private ValueMapper fiveHundred = ValueMapper.D;
-	private ValueMapper thousand = ValueMapper.M;
+//	private ValueMapper fifty = ValueMapper.L;
+//	private ValueMapper hundred = ValueMapper.C;
+//	private ValueMapper fiveHundred = ValueMapper.D;
+//	private ValueMapper thousand = ValueMapper.M;
 	private boolean doneConversion;
 	private String numberInRoman;
+	private ValueMapper upperBase;
+	private ValueMapper lowerBase;
+	
+	public ValueMapper getUpperBase() {
+		return upperBase;
+	}
+
+	public ValueMapper getLowerBase() {
+		return lowerBase;
+	}
 
 	public boolean isDoneConversion() {
 		return doneConversion;
@@ -34,24 +44,32 @@ public class ConverterEngine {
 	 * @param letter the letter to add
 	 */
 	public void setNumberInRoman(int numberOfLetters, String letter) {
-		for (int i = 0; i < numberOfLetters; i++) {
-			this.numberInRoman += letter;
+		if(numberOfLetters==4){
+			this.numberInRoman = "";
+			setNumberInRoman(1, one.name());
+			setNumberInRoman(1, ten.name());
+		}
+		else
+			for (int i = 0; i < numberOfLetters; i++) 
+				this.numberInRoman += letter;
+	}
+	
+	public void setBases(int number){
+		for (int i = ValueMapper.values().length - 1; i >= 0; i--) {
+			if(number < ValueMapper.values()[i].getValue())
+				upperBase = ValueMapper.values()[i];
+				if(i != 0)
+					lowerBase = ValueMapper.values()[i-1];
 		}		
 	}
 
 	public String convert(int number) {
-		this.convertExtremities(number);
+		this.convertBases(number);
 		
 		if (!this.isDoneConversion()){
 			//if(number > one.getValue())
 			/**
 			 * 
-			 * public int multiply9 (int n) { 
-			 * if (n == 0) { return 0; } 
-			 * else if(n == 1) { return 9; } 
-			 * else return 9 + multiply9(n-1); }
-			 * 
-			 * System.out.println(multiply9(6));
 			 * 
 			 * if(!isDoneConversion){
 			 * 
@@ -105,7 +123,7 @@ public class ConverterEngine {
 	 * @param number the number to be checked
 	 * @return the Roman equivalent or an empty string if number is not an extremity number
 	 */
-	public String convertExtremities(int number) {
+	public String convertBases(int number) {
 		for (ValueMapper values : ValueMapper.values()) {
 			if (number == values.getValue())
 				this.setNumberInRoman(1, values.name());
