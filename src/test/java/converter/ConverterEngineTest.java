@@ -78,6 +78,15 @@ public class ConverterEngineTest {
 		assertEquals(expected, actual);
 	}
 	
+	@Test
+	public void testConvertEleven() {
+		expected = "XI";
+		ConverterEngine converterEngine = new ConverterEngine();
+		actual = converterEngine.convert(11);
+		System.out.println("ELEVEN::: Actual " + actual);
+		assertEquals(expected, actual);
+	}
+	
 	@Ignore("needs another perspective")
 	@Test
 	public void testSetBases() {

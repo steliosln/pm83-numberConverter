@@ -45,9 +45,10 @@ public class ConverterEngine {
 	 */
 	public void setNumberInRoman(int numberOfLetters, String letter) {
 		if(numberOfLetters==4){
+			String temp = this.numberInRoman;
 			this.numberInRoman = "";
-			setNumberInRoman(1, one.name());
-			setNumberInRoman(1, ten.name());
+			int currentOrdinal = ValueMapper.valueOf(letter).ordinal();
+			setNumberInRoman(1, ValueMapper.values()[currentOrdinal + 1].name());
 		}
 		else
 			for (int i = 0; i < numberOfLetters; i++) 
