@@ -12,6 +12,7 @@ import org.junit.Test;
 public class ConverterEngineTest {
 	private String expected;
 	private String actual;
+	private ConverterEngine converterEngine;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -84,6 +85,8 @@ public class ConverterEngineTest {
 		ConverterEngine converterEngine = new ConverterEngine();
 		actual = converterEngine.convert(11);
 		System.out.println("ELEVEN::: Actual " + actual);
+		System.out.println(converterEngine.getDecimalPlaces(11));
+		System.out.println();
 		assertEquals(expected, actual);
 	}
 	
@@ -91,11 +94,25 @@ public class ConverterEngineTest {
 	@Test
 	public void testSetBases() {
 		expected = "LI";
-		ConverterEngine converterEngine = new ConverterEngine();
+		converterEngine = new ConverterEngine();
 		converterEngine.setBases(16);
 		System.out.println("BASES::: upper " + converterEngine.getUpperBase());
 		System.out.println("BASES::: lower " + converterEngine.getLowerBase());
 		assertEquals(expected, converterEngine.getUpperBase());
+	}
+	
+	@Test
+	public void testGetLetterAfter(){
+		expected = "M";
+		converterEngine = new ConverterEngine(2);
+		assertEquals(expected, converterEngine.getLetterAfter(ValueMapper.M).name());
+	}
+	
+	@Test
+	public void testGetLetterBefore(){
+		expected = "I";
+		converterEngine = new ConverterEngine(2);
+		assertEquals(expected, converterEngine.getLetterBefore(ValueMapper.I).name());
 	}
 
 }
