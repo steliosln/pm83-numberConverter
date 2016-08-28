@@ -89,18 +89,7 @@ public class ConverterEngineTest {
 		System.out.println();
 		assertEquals(expected, actual);
 	}
-	
-	@Ignore("needs another perspective")
-	@Test
-	public void testSetBases() {
-		expected = "LI";
-		converterEngine = new ConverterEngine(16);
-		converterEngine.setBases(16);
-		System.out.println("BASES::: upper " + converterEngine.getUpperBase());
-		System.out.println("BASES::: lower " + converterEngine.getLowerBase());
-		assertEquals(expected, converterEngine.getUpperBase());
-	}
-	
+		
 	@Test
 	public void testGetLetterAfter(){
 		expected = "M";

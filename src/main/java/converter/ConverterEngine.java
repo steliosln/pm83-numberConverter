@@ -1,7 +1,6 @@
 package converter;
 
 public class ConverterEngine {
-	public static String result2 = "";
 	private ValueMapper[] enumValues = ValueMapper.values();
 	private ValueMapper one = ValueMapper.I;
 	private ValueMapper five = ValueMapper.V;
@@ -12,8 +11,6 @@ public class ConverterEngine {
 //	private ValueMapper thousand = ValueMapper.M;
 	private boolean doneConversion;
 	private String numberInRoman;
-	private ValueMapper upperBase;
-	private ValueMapper lowerBase;
 	
 	private int numberInDecimal;
 	private String result;
@@ -21,6 +18,7 @@ public class ConverterEngine {
 	public ConverterEngine(int number) {
 		this.numberInDecimal = number;
 		this.doneConversion = false;
+		this.numberInRoman = "";
 		this.result = "";
 	}
 
@@ -28,16 +26,6 @@ public class ConverterEngine {
 		return result;
 	}
 	
-	@Deprecated
-	public ValueMapper getUpperBase() {
-		return upperBase;
-	}
-	
-	@Deprecated
-	public ValueMapper getLowerBase() {
-		return lowerBase;
-	}
-
 	public boolean isDoneConversion() {
 		return doneConversion;
 	}
@@ -103,16 +91,6 @@ public class ConverterEngine {
 			for (int i = 0; i < numberOfLetters; i++) 
 				this.numberInRoman += letter.name();
 	}
-	
-	@Deprecated
-	public void setBases(int number){
-		for (int i = enumValues.length - 1; i >= 0; i--) {
-			if(number < enumValues[i].getValue())
-				upperBase = enumValues[i];
-				if(i != 0)
-					lowerBase = enumValues[i-1];
-		}		
-	}
 
 	//TODO remove
 	@Deprecated
@@ -128,51 +106,29 @@ public class ConverterEngine {
 	}
 	
 	public void print(int number){
-		System.out.println("inside print");
-
 		ConverterEngine converterEngine = new ConverterEngine(number);
 		int decimalPlaces = converterEngine.getDecimalPlaces();
-		int remain = (int) (number % Math.pow(10, decimalPlaces));
-		System.out.println("decimal places " + decimalPlaces);
-		System.out.println("remain " + remain);
+		int afterModulus = (int) (number % Math.pow(10, decimalPlaces));
+		int remain = number - afterModulus;
 		
-		if(decimalPlaces == 0)
+		if(decimalPlaces == 0){
+			convert(number);
+			//result += convert(number);
 			result += number;
+			
+		}
 		else{
-			result += (number - remain);
-			print(remain);
+			convert(remain);
+			//result += convert(remain);
+			result += remain;
+			print(afterModulus);
 		}
 	}
-	
-	@Deprecated
-	public static void print2(int number){
-		System.out.println("inside print2");
 		
-		ConverterEngine converterEngine = new ConverterEngine(number);
-		int decimalPlaces = converterEngine.getDecimalPlaces();
-		int remain = (int) (number % Math.pow(10, decimalPlaces));
-		
-		if(decimalPlaces == 0)
-			result2 += number;
-		else{
-			result2 += (number - remain);
-			print2(remain);
-		}
-	}
-	
-	
-	
 	public String convert(int number) {
-		int remain = (int) (number % Math.pow(10, this.getDecimalPlaces(number)));
-		System.out.println("Remain: " + remain);
-		
 		this.convertBases(number);
 		
-		
-		if (!this.isDoneConversion()){
-//			this.convert(number - remain);
-//			this.convert(remain);
-			
+		if (!this.isDoneConversion()){	
 			if (number < five.getValue()) {
 				int timesBelow = 1;
 

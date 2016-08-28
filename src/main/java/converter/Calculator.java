@@ -9,9 +9,9 @@ public class Calculator {
 //		System.out.println(Math.pow(10, 2));//decimalPlaces - 1
 
 		ConverterEngine converterEngine = new ConverterEngine(77);
-		converterEngine.print(77);
-		String resulting = converterEngine.getResult();
-		System.out.println(resulting);
-		
-		}
+		converterEngine.print(11);
+		System.out.println("the numberInRoman: " + converterEngine.getNumberInRoman());
+		System.out.println("the result: " + converterEngine.getResult());
+				
+	}
 }
