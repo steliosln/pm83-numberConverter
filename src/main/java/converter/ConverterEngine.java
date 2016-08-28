@@ -4,7 +4,7 @@ public class ConverterEngine {
 	private ValueMapper[] enumValues = ValueMapper.values();
 	private ValueMapper one = ValueMapper.I;
 	private ValueMapper five = ValueMapper.V;
-	private ValueMapper ten = ValueMapper.X;
+//	private ValueMapper ten = ValueMapper.X;
 //	private ValueMapper fifty = ValueMapper.L;
 //	private ValueMapper hundred = ValueMapper.C;
 //	private ValueMapper fiveHundred = ValueMapper.D;
@@ -14,11 +14,14 @@ public class ConverterEngine {
 	
 	private int numberInDecimal;
 	private String result;
+	private String resultOfDoConversion;
 	
+	//TODO change methods to private and call start() which will be public
 	public ConverterEngine(int number) {
 		this.numberInDecimal = number;
 		this.doneConversion = false;
 		this.numberInRoman = "";
+		this.resultOfDoConversion = "";
 		this.result = "";
 	}
 
@@ -32,13 +35,6 @@ public class ConverterEngine {
 
 	public void setDoneConversion() {
 		this.doneConversion = true;
-	}
-	
-	//TODO remove
-	@Deprecated
-	public ConverterEngine() {
-		this.numberInRoman = "";
-		this.doneConversion = false;
 	}
 	
 	public String getNumberInRoman() {
@@ -77,14 +73,6 @@ public class ConverterEngine {
 				this.numberInRoman += letter.name();
 	}
 
-	//TODO remove
-	@Deprecated
-	public int getDecimalPlaces(int number){
-		int places = Integer.toString(number).length() - 1;
-		System.out.println(number + " has " + places + " Decimal places");
-		return places;
-	}
-	
 	public int getDecimalPlaces(){
 		int places = Integer.toString(this.numberInDecimal).length() - 1;
 		return places;
@@ -100,16 +88,59 @@ public class ConverterEngine {
 			convert(number);
 			//result += convert(number);
 			result += number;
-			
+//			result2 = convert(number);
+			this.doConversionOf(number);
 		}
 		else{
 			convert(remain);
 			//result += convert(remain);
 			result += remain;
+//			result2 = convert(remain);
+			this.doConversionOf(remain);
 			print(afterModulus);
 		}
 	}
 	
+	//TODO replace convert(int)
+	private void doConversionOf(int number){
+//		System.out.println("Conversion of " + number);
+		boolean gotAMatch = false;
+		
+		//case its part of enum
+		for (ValueMapper values : enumValues) {
+			if (number == values.getValue()){
+				gotAMatch = true;
+				this.resultOfDoConversion += "base";
+//				System.out.println("base nr");//this.setResultOfDoConversion(1, values);
+			}
+		}
+		//else // this check is failing the second round
+		if (!gotAMatch){
+			this.resultOfDoConversion += "notBase";
+//			System.out.println("not base");
+		}
+			
+	}
+
+	public String getResultOfDoConversion() {
+		return resultOfDoConversion;
+	}
+	
+	public void setResultOfDoConversion(int numberOfLetters, ValueMapper letter) {
+		//if numberOfLetters <=3
+		//if numberOfLetters  TODO rework here in case more than 4 or dont allow it
+		if(numberOfLetters==4){
+			int lastIndex = this.resultOfDoConversion.length() - 1; 
+			if(!this.resultOfDoConversion.isEmpty())
+				this.resultOfDoConversion = this.resultOfDoConversion.substring(0, lastIndex);
+			
+			setResultOfDoConversion(1, this.getLetterBefore(letter));
+			setResultOfDoConversion(1, this.getLetterAfter(letter));
+		}
+		else
+			for (int i = 0; i < numberOfLetters; i++) 
+				this.resultOfDoConversion += letter.name();
+	}
 		
 	public String convert(int number) {
 		this.convertBases(number);
@@ -134,9 +165,7 @@ public class ConverterEngine {
 				this.convert(number - timesAbove);
 				this.setNumberInRoman(timesAbove, one);// get letter after
 			}
-			this.setDoneConversion();
-		}		
-
+		}
 		return numberInRoman;
 	}
 
@@ -146,14 +175,13 @@ public class ConverterEngine {
 	 * @return the Roman equivalent or an empty string if numberInDecimal is not an extremity numberInDecimal
 	 */
 	public String convertBases(int number) {
+		this.doneConversion = false;
 		for (ValueMapper values : enumValues) {
-			if (number == values.getValue())
+			if (number == values.getValue()){
 				this.setNumberInRoman(1, values);
+				this.setDoneConversion();
+			}
 		}
-		
-		if (!this.numberInRoman.isEmpty())
-			this.setDoneConversion();
-		
 		return numberInRoman;
 	}
 }

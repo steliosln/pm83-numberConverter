@@ -37,7 +37,7 @@ public class ConverterEngineTest {
 	@Test
 	public void testConvertLessOrThree() {
 		expected = "II";
-		converterEngine = new ConverterEngine();
+		converterEngine = new ConverterEngine(2);
 		actual = converterEngine.convert(2);
 		System.out.println("THREEORLESS::: Actual " + actual);
 		assertEquals(expected, actual);
@@ -46,7 +46,7 @@ public class ConverterEngineTest {
 	@Test
 	public void testConvertExtremes() {
 		expected = "X";
-		converterEngine = new ConverterEngine();
+		converterEngine = new ConverterEngine(10);
 		actual = converterEngine.convert(10);
 		System.out.println("EXTREMES::: Actual " + actual);
 		assertEquals(expected, actual);
@@ -55,7 +55,7 @@ public class ConverterEngineTest {
 	@Test
 	public void testConvertFour() {
 		expected = "IV";
-		ConverterEngine converterEngine = new ConverterEngine();
+		ConverterEngine converterEngine = new ConverterEngine(4);
 		actual = converterEngine.convert(4);
 		System.out.println("FOUR::: Actual " + actual);
 		assertEquals(expected, actual);
@@ -64,7 +64,7 @@ public class ConverterEngineTest {
 	@Test
 	public void testConvertSix() {
 		expected = "VII";
-		ConverterEngine converterEngine = new ConverterEngine();
+		ConverterEngine converterEngine = new ConverterEngine(7);
 		actual = converterEngine.convert(7);
 		System.out.println("SIX::: Actual " + actual);
 		assertEquals(expected, actual);
@@ -73,7 +73,7 @@ public class ConverterEngineTest {
 	@Test
 	public void testConvertNine() {
 		expected = "IX";
-		ConverterEngine converterEngine = new ConverterEngine();
+		ConverterEngine converterEngine = new ConverterEngine(9);
 		actual = converterEngine.convert(9);
 		System.out.println("NINE::: Actual " + actual);
 		assertEquals(expected, actual);
@@ -82,10 +82,9 @@ public class ConverterEngineTest {
 	@Test
 	public void testConvertEleven() {
 		expected = "XI";
-		ConverterEngine converterEngine = new ConverterEngine();
+		ConverterEngine converterEngine = new ConverterEngine(11);
 		actual = converterEngine.convert(11);
 		System.out.println("ELEVEN::: Actual " + actual);
-		System.out.println(converterEngine.getDecimalPlaces(11));
 		System.out.println();
 		assertEquals(expected, actual);
 	}
