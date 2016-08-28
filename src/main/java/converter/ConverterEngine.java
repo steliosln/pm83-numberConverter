@@ -46,30 +46,15 @@ public class ConverterEngine {
 	}
 		
 	public ValueMapper getLetterBefore(ValueMapper letter){
-		ValueMapper tempBLetter = null;
-		for (int i = 0; i < enumValues.length; i++) {
-			if(enumValues[i].equals(letter))
-				tempBLetter = (i==0) ? ValueMapper.I : enumValues[i-1];
-		}
-		
-//		int currentPosition = letter.ordinal();
-//		int position = currentPosition == 0 ? currentPosition : currentPosition - 1;
-		//return enumValues[position];
-		
-		return tempBLetter;
+		int currentPosition = letter.ordinal();
+		int position = currentPosition == 0 ? currentPosition : currentPosition - 1;
+		return enumValues[position];
 	}
 	
 	public ValueMapper getLetterAfter(ValueMapper letter){
-		ValueMapper tempALetter = null;
-		for(int i = enumValues.length - 1; i >= 0; i--)
-			if(enumValues[i].equals(letter))
-				tempALetter = (i==enumValues.length - 1) ? ValueMapper.M : enumValues[i+1];
-		
-//		int currentPosition = letter.ordinal();
-//		int position = currentPosition == enumValues.length - 1 ? currentPosition : currentPosition + 1;
-		//return enumValues[position];
-		
-		return tempALetter;
+		int currentPosition = letter.ordinal();
+		int position = currentPosition == enumValues.length - 1 ? currentPosition : currentPosition + 1;
+		return enumValues[position];
 	}
 	
 	/**
@@ -124,6 +109,7 @@ public class ConverterEngine {
 			print(afterModulus);
 		}
 	}
+	
 		
 	public String convert(int number) {
 		this.convertBases(number);

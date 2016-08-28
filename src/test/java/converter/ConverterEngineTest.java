@@ -94,7 +94,7 @@ public class ConverterEngineTest {
 	public void testGetLetterAfter(){
 		expected = "M";
 		converterEngine = new ConverterEngine(2);
-		assertEquals(expected, converterEngine.getLetterAfter(ValueMapper.M).name());
+		assertEquals(expected, converterEngine.getLetterAfter(ValueMapper.D).name());
 	}
 	
 	@Test
