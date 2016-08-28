@@ -37,7 +37,7 @@ public class ConverterEngineTest {
 	@Test
 	public void testConvertLessOrThree() {
 		expected = "II";
-		ConverterEngine converterEngine = new ConverterEngine();
+		converterEngine = new ConverterEngine();
 		actual = converterEngine.convert(2);
 		System.out.println("THREEORLESS::: Actual " + actual);
 		assertEquals(expected, actual);
@@ -46,7 +46,7 @@ public class ConverterEngineTest {
 	@Test
 	public void testConvertExtremes() {
 		expected = "X";
-		ConverterEngine converterEngine = new ConverterEngine();
+		converterEngine = new ConverterEngine();
 		actual = converterEngine.convert(10);
 		System.out.println("EXTREMES::: Actual " + actual);
 		assertEquals(expected, actual);
@@ -94,7 +94,7 @@ public class ConverterEngineTest {
 	@Test
 	public void testSetBases() {
 		expected = "LI";
-		converterEngine = new ConverterEngine();
+		converterEngine = new ConverterEngine(16);
 		converterEngine.setBases(16);
 		System.out.println("BASES::: upper " + converterEngine.getUpperBase());
 		System.out.println("BASES::: lower " + converterEngine.getLowerBase());

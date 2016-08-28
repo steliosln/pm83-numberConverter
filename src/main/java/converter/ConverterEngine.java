@@ -1,6 +1,7 @@
 package converter;
 
 public class ConverterEngine {
+	public static String result2 = "";
 	private ValueMapper[] enumValues = ValueMapper.values();
 	private ValueMapper one = ValueMapper.I;
 	private ValueMapper five = ValueMapper.V;
@@ -20,12 +21,19 @@ public class ConverterEngine {
 	public ConverterEngine(int number) {
 		this.numberInDecimal = number;
 		this.doneConversion = false;
+		this.result = "";
 	}
 
+	public String getResult() {
+		return result;
+	}
+	
+	@Deprecated
 	public ValueMapper getUpperBase() {
 		return upperBase;
 	}
-
+	
+	@Deprecated
 	public ValueMapper getLowerBase() {
 		return lowerBase;
 	}
@@ -38,7 +46,8 @@ public class ConverterEngine {
 		this.doneConversion = true;
 	}
 	
-	//TODO initialize the class with a numberInDecimal.
+	//TODO remove
+	@Deprecated
 	public ConverterEngine() {
 		this.numberInRoman = "";
 		this.doneConversion = false;
@@ -95,6 +104,7 @@ public class ConverterEngine {
 				this.numberInRoman += letter.name();
 	}
 	
+	@Deprecated
 	public void setBases(int number){
 		for (int i = enumValues.length - 1; i >= 0; i--) {
 			if(number < enumValues[i].getValue())
@@ -104,6 +114,8 @@ public class ConverterEngine {
 		}		
 	}
 
+	//TODO remove
+	@Deprecated
 	public int getDecimalPlaces(int number){
 		int places = Integer.toString(number).length() - 1;
 		System.out.println(number + " has " + places + " Decimal places");
@@ -117,9 +129,12 @@ public class ConverterEngine {
 	
 	public void print(int number){
 		System.out.println("inside print");
-		
-		int decimalPlaces = this.getDecimalPlaces();
+
+		ConverterEngine converterEngine = new ConverterEngine(number);
+		int decimalPlaces = converterEngine.getDecimalPlaces();
 		int remain = (int) (number % Math.pow(10, decimalPlaces));
+		System.out.println("decimal places " + decimalPlaces);
+		System.out.println("remain " + remain);
 		
 		if(decimalPlaces == 0)
 			result += number;
@@ -127,7 +142,25 @@ public class ConverterEngine {
 			result += (number - remain);
 			print(remain);
 		}
-	}	
+	}
+	
+	@Deprecated
+	public static void print2(int number){
+		System.out.println("inside print2");
+		
+		ConverterEngine converterEngine = new ConverterEngine(number);
+		int decimalPlaces = converterEngine.getDecimalPlaces();
+		int remain = (int) (number % Math.pow(10, decimalPlaces));
+		
+		if(decimalPlaces == 0)
+			result2 += number;
+		else{
+			result2 += (number - remain);
+			print2(remain);
+		}
+	}
+	
+	
 	
 	public String convert(int number) {
 		int remain = (int) (number % Math.pow(10, this.getDecimalPlaces(number)));
@@ -137,8 +170,8 @@ public class ConverterEngine {
 		
 		
 		if (!this.isDoneConversion()){
-			this.convert(number - remain);
-			this.convert(remain);
+//			this.convert(number - remain);
+//			this.convert(remain);
 			
 			if (number < five.getValue()) {
 				int timesBelow = 1;
@@ -157,7 +190,7 @@ public class ConverterEngine {
 					timesAbove++;
 				}
 				this.convert(number - timesAbove);
-				this.setNumberInRoman(timesAbove, one);
+				this.setNumberInRoman(timesAbove, one);// get letter after
 			}
 			this.setDoneConversion();
 		}		
