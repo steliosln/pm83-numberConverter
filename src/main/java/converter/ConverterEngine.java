@@ -5,7 +5,7 @@ public class ConverterEngine {
 	private ValueMapper one = ValueMapper.I;
 	private ValueMapper five = ValueMapper.V;
 //	private ValueMapper ten = ValueMapper.X;
-//	private ValueMapper fifty = ValueMapper.L;
+	private ValueMapper fifty = ValueMapper.L;
 //	private ValueMapper hundred = ValueMapper.C;
 //	private ValueMapper fiveHundred = ValueMapper.D;
 //	private ValueMapper thousand = ValueMapper.M;
@@ -40,10 +40,19 @@ public class ConverterEngine {
 	public String getNumberInRoman() {
 		return numberInRoman;
 	}
-		
+	
+	/**
+	 * Gets the letter that comes before a given letter
+	 * @param letter any letter to check the letter that comes before
+	 * @return any Roman letter except V and L
+	 */
 	public ValueMapper getLetterBefore(ValueMapper letter){
 		int currentPosition = letter.ordinal();
 		int position = currentPosition == 0 ? currentPosition : currentPosition - 1;
+		
+		if(enumValues[position].name().equals(five.name()) || enumValues[position].equals(fifty.name()))
+			position -= 1;
+		
 		return enumValues[position];
 	}
 	
@@ -86,16 +95,12 @@ public class ConverterEngine {
 		
 		if(decimalPlaces == 0){
 			convert(number);
-			//result += convert(number);
 			result += number;
-//			result2 = convert(number);
 			this.doConversionOf(number);
 		}
 		else{
 			convert(remain);
-			//result += convert(remain);
 			result += remain;
-//			result2 = convert(remain);
 			this.doConversionOf(remain);
 			print(afterModulus);
 		}
@@ -103,21 +108,31 @@ public class ConverterEngine {
 	
 	//TODO replace convert(int)
 	private void doConversionOf(int number){
-//		System.out.println("Conversion of " + number);
 		boolean gotAMatch = false;
 		
-		//case its part of enum
 		for (ValueMapper values : enumValues) {
+			//if it is I, V, X, L, C, D, M
 			if (number == values.getValue()){
 				gotAMatch = true;
-				this.resultOfDoConversion += "base";
-//				System.out.println("base nr");//this.setResultOfDoConversion(1, values);
+				this.setResultOfDoConversion(1, values);
+			}
+			else if(number == values.getValue() - 1){
+				gotAMatch = true;
+				this.setResultOfDoConversion(1, this.getLetterBefore(values));
+//				this.doConversionOf(number + 1);
+				this.setResultOfDoConversion(1, values);
 			}
 		}
-		//else // this check is failing the second round
 		if (!gotAMatch){
-			this.resultOfDoConversion += "notBase";
-//			System.out.println("not base");
+			gotAMatch = false;
+			
+			if(number <= 3){
+				this.setResultOfDoConversion(number, this.one);
+			}
+			else
+				this.resultOfDoConversion += "notBase";
+			
+			
 		}
 			
 	}

@@ -102,5 +102,12 @@ public class ConverterEngineTest {
 		converterEngine = new ConverterEngine(2);
 		assertEquals(expected, converterEngine.getLetterBefore(ValueMapper.I).name());
 	}
+	
+	@Test
+	public void testGetLetterBeforeTen(){
+		expected = "I";
+		converterEngine = new ConverterEngine(2);
+		assertEquals(expected, converterEngine.getLetterBefore(ValueMapper.X).name());
+	}
 
 }
