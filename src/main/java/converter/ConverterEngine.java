@@ -24,6 +24,11 @@ public class ConverterEngine {
 		this.resultOfDoConversion = "";
 		this.result = "";
 	}
+	
+	public String execute(){
+		this.print(numberInDecimal);
+		return this.getResultOfDoConversion();
+	}
 
 	public String getResult() {
 		return result;
@@ -119,22 +124,18 @@ public class ConverterEngine {
 			else if(number == values.getValue() - 1){
 				gotAMatch = true;
 				this.setResultOfDoConversion(1, this.getLetterBefore(values));
-//				this.doConversionOf(number + 1);
 				this.setResultOfDoConversion(1, values);
 			}
 		}
 		if (!gotAMatch){
-			gotAMatch = false;
-			
 			if(number <= 3){
 				this.setResultOfDoConversion(number, this.one);
 			}
-			else
-				this.resultOfDoConversion += "notBase";
-			
-			
-		}
-			
+			else{
+				this.setResultOfDoConversion(1, this.five);
+				this.doConversionOf(number - this.five.getValue());
+			}			
+		}			
 	}
 
 	public String getResultOfDoConversion() {
